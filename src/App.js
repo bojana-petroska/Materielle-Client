@@ -2,14 +2,24 @@ import './App.css';
 import SignupPage from './pages/SignupPage';
 import { Routes, Route } from "react-router-dom";
 import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import Navbar from './components/Navbar';
+import { add } from 'google-fonts';
+
+add({
+  Montserrat: true,
+  weights: [300, 500, 600],
+});
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+    <Navbar />
         
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={ <HomePage />} />
         <Route path="/signup" element={ <SignupPage />} />
+        <Route path="/login" element={ <LoginPage />} />
       </Routes>
     </div>
   );

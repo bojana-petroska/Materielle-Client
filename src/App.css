@@ -7,6 +7,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin: 0;
+      padding: 0;
     }
 
     style, title {
@@ -51,5 +53,44 @@
         transform: rotate(360deg);
       }
     }
+
+    #dropdown-menu {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      border: 1px solid black;
+      transition: left 0.3s ease-in-out;
+    }
     
+    #dropdown-menu.open {
+      left: 0;
+    }
+    #menu-container {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .nav-box {
+      display: flex;
+      justify-content: space-around;
+      flex-direction: row;
+      color: rgb(15, 93, 162);
+      width: 100%;
+      left: 0;
+      position: fixed;
+      top: 0;
+      z-index: 999;
+    }
+    
+  
   }
+
+  
+  
+  
