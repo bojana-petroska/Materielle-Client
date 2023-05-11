@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import authService from "./../services/auth.service";
+import NavOtherPages from "../components/NavOtherPages";
 
 
 function SignupPage(props) {
@@ -48,49 +49,56 @@ function SignupPage(props) {
   };
 
   return (
-    <div className="SignupPage">
-      <h1>Sign Up</h1>
+    <div>
+      <NavOtherPages />
+      <div className="SignupPage">
+
+      <h1 style={{fontSize: "16px"}}>SIGN UP</h1>
+
 
       <form onSubmit={handleSignupSubmit}>
-        <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
+        <label>Email *</label>
+        <input placeholder="email@email.com" type="email" name="email" value={email} onChange={handleEmail} />
 
-        <label>Password:</label>
-        <input type="password" name="password" value={password} onChange={handlePassword} />
+        <label>Password *</label>
+        <input placeholder="Password" type="password" name="password" value={password} onChange={handlePassword} />
 
-        <label>Repeat Password:</label>
-        <input type="password" name="password" value={password} onChange={handlePassword} />
+        <label>Repeat Password *</label>
+        <input placeholder="Repeat Password" type="password" name="password" value={password} onChange={handlePassword} />
 
-        <label>User Name:</label>
-        <input type="text" name="name" value={username} onChange={handleName} />
+        <label>User Name *</label>
+        <input placeholder="Name" type="text" name="name" value={username} onChange={handleName} />
 
-        <label>I am:</label>
-          <input type="radio" id="curious-individual" name="userType" value="Curious individual" onChange={handleUserType} />
+        <label>I am: (optional)</label>
+          <input className="selection-circle" type="radio" id="curious-individual" name="userType" value="Curious individual" onChange={handleUserType} />
             <label htmlFor="curious-individual">Curious Individual</label>
-          <input type="radio" id="professional" name="userType" value="Professional" onChange={handleUserType} />
+          <input className="selection-circle" type="radio" id="professional" name="userType" value="Professional" onChange={handleUserType} />
             <label htmlFor="professional">Professional</label>
 
-        <label>Company:</label>
-        <input type="text" name="company" value={company} onChange={handleCompany} />
+        <label>Company: (optional)</label>
+        <input placeholder="Name of company" type="text" name="company" value={company} onChange={handleCompany} />
 
-        <label>I am interested in:</label>
-          <input type="radio" id="exterior" name="iAmInterestedIn" value="Exterior" onChange={handleIAmInterestedIn} />
+        <label>I am interested in: (optional)</label>
+          <input className="selection-circle" type="radio" id="exterior" name="userType" value="Exterior" onChange={handleIAmInterestedIn} />
             <label htmlFor="exterior">Exterior</label>
-          <input type="radio" id="interior" name="iAmInterestedIn" value="Interior" onChange={handleIAmInterestedIn} />
+          <input className="selection-circle" type="radio" id="interior" name="userType" value="Interior" onChange={handleIAmInterestedIn} />
             <label htmlFor="interior">Interior</label>
-          <input type="radio" id="both" name="both" value="Both" onChange={handleIAmInterestedIn} />
+          <input className="selection-circle" type="radio" id="both" name="userType" value="Both" onChange={handleIAmInterestedIn} />
             <label htmlFor="both">Both</label>
 
-          <input type="checkbox" id="agreeToTerms" name="agreeToTerms" value={agreeToTerms} onClick={handleAgreeToTerms} />
-        <label>By continuing you agree to our Terms of Service and Privacy Policy.</label>
+          <div className="agreeToTerms">
+            <input type="checkbox" id="agreeToTerms" name="agreeToTerms" value={agreeToTerms} onClick={handleAgreeToTerms} />
+            <label for="agreeToTerms">By continuing you agree to our Terms of Service and Privacy Policy.</label>
+          </div>
 
-        <button type="submit">Sign Up</button>
+        <button className="sign-login-btn" type="submit">Sign Up</button>
       </form>
 
         { errorMessage && <p className="error-message">{errorMessage}</p> }
 
-        <p>Already have account?</p>
-        <Link to={"/login"}> Login</Link>
+        <p style={{fontSize: "12px"}}>Already have account?</p>
+        <Link to={"/login"} style={{textDecoration: "none", color: "#323232", fontSize: "14px"}}> Login</Link>
+      </div>
   </div>
   )
 }

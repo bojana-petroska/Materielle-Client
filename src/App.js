@@ -3,7 +3,6 @@ import SignupPage from './pages/SignupPage';
 import { Routes, Route } from "react-router-dom";
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
-import Navbar from './components/Navbar';
 import { add } from 'google-fonts';
 
 add({
@@ -14,7 +13,6 @@ add({
 function App() {
   return (
     <div className="App" style={{ fontFamily: "'Montserrat', sans-serif" }}>
-    <Navbar />
         
       <Routes>
         <Route path="/" element={ <HomePage />} />
