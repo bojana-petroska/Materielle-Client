@@ -54,7 +54,7 @@ function Navbar() {
         {menuOpen &&
             <div onClick={handleContainerClick}>
                 <ul id="dropdown-menu" className={menuOpen ? 'open' : '' }>
-                    <li>My Profile</li>
+                    <Link className="my-profile-drop-menu" to="/profile">My Profile</Link>
                     <li>Materials</li>
                     <li>About Us</li>
                     <li>Contact</li>

@@ -8,7 +8,7 @@ function HomePage() {
       <div>
         <Navbar />
        
-        <div class="stories-on-top">
+        <div className="stories-on-top">
          <p id="circle" style={{backgroundColor: '#DEAE8F', width: '75px', height: '75px', borderRadius: '50%', textAlign: 'center', lineHeight: '75px', fontSize: '14px'}}>Ceiling</p>
          <p id="circle" style={{backgroundColor: '#E6E8DD', width: '75px', height: '75px', borderRadius: '50%', textAlign: 'center', lineHeight: '75px', fontSize: '14px'}}>Wall</p>
          <p id="circle" style={{backgroundColor: '#5E6871', width: '75px', height: '75px', borderRadius: '50%', textAlign: 'center', lineHeight: '75px', fontSize: '14px', color: '#FFFFFF'}}>Bathroom</p>

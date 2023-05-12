@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "./../context/auth.context";
 import authService from "./../services/auth.service";
+import NavOtherPages from "../components/NavOtherPages";
 
 
 function LoginPage(props) {
@@ -38,22 +39,26 @@ function LoginPage(props) {
   };
   
   return (
+    <div>
+      <NavOtherPages />
     <div className="LoginPage">
-      <h1>Login</h1>
+      <h1 style={{fontSize: "16px"}}>LOG IN</h1>
 
       <form onSubmit={handleLoginSubmit}>
-        <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
+        <label>Email</label>
+        <input placeholder="email@email.com" type="email" name="email" value={email} onChange={handleEmail} />
 
-        <label>Password:</label>
-        <input type="password" name="password" value={password} onChange={handlePassword} />
+        <label>Password</label>
+        <input placeholder="Password" type="password" name="password" value={password} onChange={handlePassword} />
 
-        <button type="submit">Login</button>
+      <br></br>
+        <button className="sign-login-btn" type="submit">LOG IN</button>
       </form>
       { errorMessage && <p className="error-message">{errorMessage}</p> }
 
-      <p>Don't have an account yet?</p>
-      <Link to={"/signup"}> Sign Up</Link>
+      <p style={{fontSize: "12px"}}>Don't have an account yet?</p>
+      <Link to={"/signup"} style={{textDecoration: "none", color: "#323232", fontSize: "14px"}}>SIGN UP</Link>
+    </div>
     </div>
   )
 }

@@ -1,3 +1,18 @@
+:root {
+  --border-radius-bigger: 40px;
+  --border-radius-smaller: 10px;
+  --border-radius-circles: 50px;
+  --border-color-dark: #666666;
+  --border-input-text-dark: #666666;
+  --text-color-light: #FFFFFF;
+  --text-color-dark: #235864;
+  --text-color-black: #323232;
+  --background-color-light: #FFFFFF;
+  --background-color-dark: #235864;
+  --border-color-dark: #323232;
+  --border-bottom-grey: #C4C4C4;
+}
+    
     * {
       display: flex;
       flex-direction: column;
@@ -56,20 +71,15 @@
       align-items: center;
       margin: 5px;
     }
-
-    .nav-name {
-      text-decoration: none;
-      color: #323232;
-    }
-
+    
     #dropdown-menu {
       position: fixed;
       top: 0;
       left: -100%;
       width: 100%;
       height: 100%;
-      background-color: white;
-      border: 1px solid black;
+      background-color: var(--background-color-light);
+      border: 1px solid var(--border-color-dark);
       transition: left 0.3s ease-in-out;
       z-index: 999;
     }
@@ -89,11 +99,11 @@
       flex-direction: row;
       width: 100%;
       position: fixed;
-      background-color: white;
+      background-color: var(--background-color-light);
       padding: 5px;
       margin: 20px 0;
       align-items: center;
-      border-bottom:  0.5px solid #C4C4C4;
+      border-bottom:  0.5px solid var(--border-bottom-grey);
     }
 
   .stories-on-top {
@@ -110,179 +120,104 @@
     flex-direction: row;
   }
 
-  .img-container-tiles {
+  .img-container-tiles, 
+  .img-container-parquet,
+  .img-container-glas,
+  .img-container-facade,
+  .img-container-stone,
+  .img-container-textile,
+  .img-container-project1,
+  .img-container-project2,
+  .img-container-project3,
+  .img-container-project4,
+  .img-container-project5,
+  .img-container-project6  {
     text-align: center;
-    background-image: url("./images/01_tiles.jpg");
     width: 150px;
     height: 150px;
-    border-radius: 10px;
+    border-radius: var(--border-radius-smaller);
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  
+  .img-container-tiles {
+    background-image: url("./images/01_tiles.jpg");
+    margin: 20px 2px 10px 35px;
+  }
+  .img-container-project1 {
+    background-image: url("../public/images/my-profile/01.webp");
     margin: 20px 2px 10px 35px;
   }
 
   .img-container-parquet {
-    text-align: center;
     background-image: url("./images/02_parquett.jpg");
-    width: 150px;
-    height: 150px;
-    border-radius: 10px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin: 20px 35px 10px 2px;
+  }
+  .img-container-project2 {
+    background-image: url("../public/images/my-profile/02.webp");
     margin: 20px 35px 10px 2px;
   }
 
   .img-container-glas {
-    text-align: center;
     background-image: url("./images/03_glass.jpg");
-    width: 150px;
-    height: 150px;
-    border-radius: 10px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin: 20px 2px 10px 35px;
+  }
+  .img-container-project3 {
+    background-image: url("../public/images/my-profile/03.webp");
     margin: 20px 2px 10px 35px;
   }
 
   .img-container-facade {
-    text-align: center;
     background-image: url("./images/04_facade.webp");
-    width: 150px;
-    height: 150px;
-    border-radius: 10px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin: 20px 35px 10px 2px;
+  }
+  .img-container-project4 {
+    background-image: url("../public/images/my-profile/04.webp");
     margin: 20px 35px 10px 2px;
   }
 
   .img-container-stone {
-    text-align: center;
     background-image: url("./images/stone.jpg");
-    width: 150px;
-    height: 150px;
-    border-radius: 10px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin: 20px 2px 10px 35px;
+  }
+  .img-container-project5 {
+    background-image: url("../public/images/my-profile/05.jpg");
     margin: 20px 2px 10px 35px;
   }
 
-    .img-container-textile {
-    text-align: center;
+  .img-container-textile {
     background-image: url("./images/textile.jpg");
-    width: 150px;
-    height: 150px;
-    border-radius: 10px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin: 20px 35px 10px 2px;
+  }
+  .img-container-project6 {
+    background-image: url("../public/images/my-profile/06.jpg");
     margin: 20px 35px 10px 2px;
   }
 
-  .link-img-tiles {
-    text-decoration: none;
-    color: #FFFFFF;
-    font-size: 16px;
-    background-color: rgba(94, 104, 113, 0.3);
-    padding: 5px;
-    border-radius: 10px;
-    width: 65px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  .text-under-projects {
+    background-color: red;
   }
 
-  .link-img-parquet {
-    text-decoration: none;
-    color: #FFFFFF;
-    font-size: 16px;
-    background-color: rgba(94, 104, 113, 0.3);
-    padding: 5px;
-    border-radius: 10px;
-    width: 95px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .link-img-glas {
-    text-decoration: none;
-    color: #FFFFFF;
-    font-size: 16px;
-    background-color: rgba(94, 104, 113, 0.3);
-    padding: 5px;
-    border-radius: 10px;
-    width: 65px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .link-img-facade {
-    text-decoration: none;
-    color: #FFFFFF;
-    font-size: 16px;
-    background-color: rgba(94, 104, 113, 0.3);
-    padding: 5px;
-    border-radius: 10px;
-    width: 95px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .link-img-stone {
-    text-decoration: none;
-    color: #FFFFFF;
-    font-size: 16px;
-    background-color: rgba(94, 104, 113, 0.3);
-    padding: 5px;
-    border-radius: 10px;
-    width: 65px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
+  .link-img-tiles, 
+  .link-img-parquet,
+  .link-img-glas,
+  .link-img-facade,
+  .link-img-stone,
   .link-img-textile {
     text-decoration: none;
     color: #FFFFFF;
     font-size: 16px;
     background-color: rgba(94, 104, 113, 0.3);
     padding: 5px;
-    border-radius: 10px;
-    width: 95px;
+    border-radius: var(--border-radius-smaller);
+    width: auto;
     height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-
-  .img-box-home-page img {
-    width: 50%;
-    height: auto;
-    margin: 15px 10px;
-    position: relative;
   }
 
   .home-page-btns-wrap {
@@ -294,7 +229,9 @@
   }
   
   .home-page-btn-blue,
-  .home-page-btn-white {
+  .home-page-btn-white,
+  .profile-page-btn-blue,
+  .profile-page-btn-white {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -303,42 +240,54 @@
     margin: 10px 25px;
     font-size: 14px;
     padding: 3px;
-    border-radius: 40px;
+    border-radius: var(--border-radius-bigger);
     text-align: center;
   }
   
-  .home-page-btn-blue {
-    background-color: #235864;
-    color: #FFFFFF;
+  .home-page-btn-blue,
+  .profile-page-btn-blue {
+    background-color: var(--background-color-dark);
+    color: var(--text-color-light);
     border: none;
   }
   
-  .home-page-btn-white {
-    background-color: #FFFFFF;
-    color: #323232;
-    border: solid #323232 0.5px;
+  .home-page-btn-white,
+  .profile-page-btn-white {
+    background-color: var(--background-color-light);
+    color: var(--text-color-black);
+    border: solid var(--border-color-dark) 0.5px;
   }
 
-  .SignupPage {
+  .profile-page-btn-white,
+  .profile-page-btn-blue {
+    width: 150px !important;
+    margin: 22px !important;
+  }
+
+  .SignupPage,
+  .LoginPage,
+  .ProfilePage {
     margin-top: 80px;
   }
 
-  .SignupPage label {
-    color: #235864;
+  .SignupPage label,
+  .LoginPage label {
+    color: var(--text-color-black);
     text-align: left;  
     margin: 5px 20px;
     font-weight: bold;
     font-size: 14px;
   }
 
-  .SignupPage input {
+  .SignupPage input,
+  .LoginPage input {
     margin: 2px 20px;
     height: 40px;
-    border-radius: 40px;
-    border: 1px solid #666666;
+    border-radius: var(--border-radius-bigger);
+    border: 0.7px solid var(--border-color-dark);
     padding-left: 12px;
     font-size: 15px;
-    color: #666666;
+    color: var(--border-input-text-dark);
   }
 
   .title-other-page {
@@ -346,12 +295,12 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    border-bottom:  0.5px solid #C4C4C4;
+    border-bottom:  0.5px solid var(--border-bottom-grey);
     padding: 15px;
     /* margin: 20px 0; */
     width: 100%;
     position: fixed;
-    background-color: white;
+    background-color: var(--background-color-light);
   }
   
   input[type="radio"] {
@@ -385,9 +334,9 @@
     transform: translateY(-50%);
     width: 20px;
     height: 20px;
-    border-radius: 50%;
-    border: 2px solid #ccc;
-    background-color: #fff;
+    border-radius: var(--border-radius-circles);
+    border: 2px solid var(--border-bottom-grey);
+    background-color: var(--background-color-light);
   }
   
   label[for^="curious-individual"]::after,
@@ -403,8 +352,8 @@
     transform: translateY(-50%);
     width: 10px;
     height: 10px;
-    border-radius: 50%;
-    background-color: #235864;
+    border-radius: var(--border-radius-circles);
+    background-color: var(--background-color-dark);
   }
   
   input[type="radio"]:checked + label::after {
@@ -417,7 +366,7 @@
     appearance: none;
     width: 18px;
     height: 18px;
-    border: 2px solid #ccc;
+    border: 2px solid var(--border-bottom-grey);
     border-radius: 50%;
     outline: none;
     cursor: pointer;
@@ -434,17 +383,16 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border-radius: 50%;
-    background-color: #235864;
+    border-radius: var(--border-radius-circles);
+    background-color: var(--background-color-dark);
   }
   
   label[for="agreeToTerms"] {
     display: inline-block;
     vertical-align: middle;
     font-size: 12px;
-    color: #666666;
+    color: var(--text-color-black);
     margin: 0 10px 0 0;
-  
   }
 
   .agreeToTerms {
@@ -464,11 +412,26 @@
     margin: 10px 25px;
     font-size: 14px;
     padding: 3px;
-    border-radius: 40px;
+    border-radius: var(--border-radius-bigger);
     text-align: center;
-    background-color: #235864;
-    color: #FFFFFF;
+    background-color: var(--background-color-dark);
+    color: var(--text-color-light);
     border: none;
+  }
+
+  .profile-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .user-description {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-right: 160px;
+    margin-top: 10px;
+    font-size: 16px;
   }
   
   

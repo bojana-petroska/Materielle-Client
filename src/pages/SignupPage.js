@@ -91,13 +91,13 @@ function SignupPage(props) {
             <label for="agreeToTerms">By continuing you agree to our Terms of Service and Privacy Policy.</label>
           </div>
 
-        <button className="sign-login-btn" type="submit">Sign Up</button>
+        <button className="sign-login-btn" type="submit">SIGN UP</button>
       </form>
 
         { errorMessage && <p className="error-message">{errorMessage}</p> }
 
-        <p style={{fontSize: "12px"}}>Already have account?</p>
-        <Link to={"/login"} style={{textDecoration: "none", color: "#323232", fontSize: "14px"}}> Login</Link>
+        <p style={{fontSize: "12px"}}>Already have an account?</p>
+        <Link to={"/login"} style={{textDecoration: "none", color: "#323232", fontSize: "14px"}}> LOG IN</Link>
       </div>
   </div>
   )

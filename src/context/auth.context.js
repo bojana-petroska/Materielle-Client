@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import authService from "./../services/auth.service";
+import axios from "axios";
 
 const AuthContext = React.createContext();
+
+const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005/";
 
 function AuthProviderWrapper(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
+
   
   const storeToken = (token) => {
     localStorage.setItem("authToken", token);
@@ -29,14 +33,14 @@ function AuthProviderWrapper(props) {
         // Update state variables        
           setIsLoggedIn(true);
           setIsLoading(false);
-          setUser(user);
+          // setUser(user)
+          getUserContext(user);
         })
         .catch((error) => {
           // If the server sends an error response (invalid token) ❌
           // Update state variables        
           setIsLoggedIn(false);
           setIsLoading(false);
-          setUser(null);
         });
 
     } else {
@@ -46,6 +50,22 @@ function AuthProviderWrapper(props) {
       setUser(null);
     }
   }
+
+  const getUserContext = () => {
+
+    const storedToken = localStorage.getItem("authToken");
+
+    axios
+      .get(
+        `${API_URL}auth/profile`, 
+          { headers: { Authorization: `Bearer ${storedToken}`} }
+        )
+      .then((response) => {
+        const oneUser = response.data;
+        setUser(oneUser);
+      })
+      .catch((err) => console.log(err)); 
+    };
 
   const removeToken = () => {
     // Upon logout, remove the token from the localStorage
