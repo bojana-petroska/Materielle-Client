@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import NavOtherPages from "../components/NavOtherPages";
 
-function SearchBar(props) {
+function ParquetPage(props) {
 
   const [materials, setMaterials] = useState();
   const [query, setQuery] = useState('');
+  const [sortBy, setSortBy] = useState('');
 
 
   const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005/";
@@ -12,7 +14,18 @@ function SearchBar(props) {
   const handleInputSearch = (event) => {
     setQuery(event.target.value);
   }
-  
+
+  const handleSortByChange = () => {
+    axios
+      .get(`${API_URL}auth/search?query=${query}&sortBy=${sortBy}`)
+      .then((response) => {
+        setMaterials(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+    
   useEffect(() => {
     axios
     .get(`${API_URL}auth/search?query=${query}`)
@@ -22,31 +35,46 @@ function SearchBar(props) {
     .catch((err) => {
       console.log(err)
     })
-  }, [query]);
+  }, [query, sortBy]);
 
   return (
-    <div className="nav-search">
+    <div>
+        <NavOtherPages />
+
+    <div className="nav-search-parquet">
+
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M7.03999 13.28C3.58399 13.28 0.799988 10.496 0.799988 7.04005C0.799988 3.58405 3.58399 0.800049 7.03999 0.800049C10.496 0.800049 13.28 3.58405 13.28 7.04005C13.28 10.496 10.496 13.28 7.03999 13.28ZM7.03999 1.76005C4.11199 1.76005 1.75999 4.11205 1.75999 7.04005C1.75999 9.96805 4.11199 12.32 7.03999 12.32C9.96799 12.32 12.32 9.96805 12.32 7.04005C12.32 4.11205 9.96799 1.76005 7.03999 1.76005Z" fill="#989898"/>
         <path d="M11.6874 11.0081L15.9978 15.3185L15.3191 15.9972L11.0087 11.6868L11.6874 11.0081Z" fill="#989898"/>
       </svg>
       <input
-        className="nav-search"
+        className="nav-search-parquet"
         type="text"
         placeholder='type keywords...'
         value={query}
         onChange={handleInputSearch}  
       />
-      {/* {materials.map((material) => {
+      <div className="list-of-parquet">
+
+      <button onClick={handleSortByChange} className="just-button">Sort by name</button>
+
+      {materials && materials.map((material) => {
         return (
           <div key={material._id}>
-            <p>{material.name}</p>
+          <img src={material.imageUrl} alt="parquet"></img>
+            <p>name: {material.name}</p>
+            <p>description: {material.description}</p>
+            <p>category: {material.category}</p>
+            <p>manufacturer: {material.manufacturer}</p>
+            <p>price: {material.price}</p>
+            <p>certification: {material.sustainabilityFromLeed}</p>
           </div>
         )
-      })} */}
-
+      })}
+      </div>
+    </div>
     </div>
   );
 }
 
-export default SearchBar;
+export default ParquetPage;

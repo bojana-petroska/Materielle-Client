@@ -2,8 +2,10 @@ import Navbar from "../components/Navbar";
 import StartNow from "../components/StartNow";
 import FindInspiration from "../components/FindInspiration ";
 import { Link } from "react-router-dom";
+import React, { useState } from 'react';
 
 function HomePage() {
+
     return (
       <div>
         <Navbar />
@@ -38,7 +40,7 @@ function HomePage() {
             </Link>
           </div>
           <div className="img-container-parquet">
-            <Link to="/signup" className="link-img-parquet">PARQUET
+            <Link to="/parquet" className="link-img-parquet">PARQUET
             </Link>
           </div>
           <div className="img-container-glas">
@@ -56,7 +58,6 @@ function HomePage() {
             </Link>
           </div>
         </div>
-
 
       </div>
     );

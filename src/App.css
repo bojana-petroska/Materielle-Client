@@ -434,6 +434,46 @@
     font-size: 16px;
   }
   
+  /* .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .file-input {
+    margin-bottom: 20px;
+  }
+  
+  .upload-button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .upload-button:hover {
+    background-color: #45a049;
+  }
+  
+  .upload-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  } */
+
+  
+  .list-of-parquet {
+    margin: 20px 20px 0 20px;
+  }
+
+  .nav-search-parquet {
+    margin: 30px;
+  }
   
   
 

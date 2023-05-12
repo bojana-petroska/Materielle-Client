@@ -3,10 +3,10 @@ import { AuthContext } from "../context/auth.context";
 import { useContext, useState } from "react"; 
 import axios from "axios";
 
-function ProfilePage() {
+function EditPage() {
 
   const { user } = useContext(AuthContext)
-  console.log("USER", user)
+  //console.log("USER", user)
 
   const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005/";
 
@@ -36,6 +36,16 @@ function ProfilePage() {
     <div>
     <NavOtherPages />
     <div className=" ProfilePage profile-top">
+
+
+    <div>
+      <input className="file-input" type="file" onChange={handleFileChange} />
+        <button className="upload-button" onClick={handleUpload} disabled={!selectedFile}>
+        Upload Photo
+      </button>
+    </div>
+
+
       <div>
         <img className="stories-on-top" src="/images/my-profile/paris.jpg" alt="profile photo"  style={{width: '86px', height: '86px', borderRadius: '50%', marginLeft: "34px", marginTop: "0px"}}/>
       </div>
@@ -78,5 +88,5 @@ function ProfilePage() {
   );
 }
 
-export default ProfilePage;
+export default EditPage;
 

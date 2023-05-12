@@ -1,0 +1,101 @@
+[
+{
+    "name": "GlamourWood Deluxe",
+    "description": "High-quality parquet with a luxurious finish",
+    "category": "Kitchen",
+    "imageUrl": "https://res.cloudinary.com/dedic4gjv/image/upload/v1683897349/GlamourWood_Deluxe_aus7bs.jpg",
+    "manufacturer": "Elegant Floors",
+    "price": 49.99,
+    "sustainabilityFromLeed": "Certified Sustainable Materials"
+},
+{
+    "name": "NatureCraft Oak",
+    "description": "Beautiful and durable oak parquet flooring",
+    "category": "Bathroom",
+    "imageUrl": "https://res.cloudinary.com/doiidwyh3/image/upload/v1683898927/oiled_oak_eng_125.jpg__1024x768_q85_subsampling-2_uuqvqn.jpg",
+    "manufacturer": "Heritage Hardwoods",
+    "price": 39.99,
+    "sustainabilityFromLeed": "Recyclable Materials"
+},
+{
+    "name": "Artisan Walnut",
+    "description": "Exquisite walnut parquet for a touch of elegance",
+    "category": "Wall",
+    "imageUrl": "https://res.cloudinary.com/doiidwyh3/image/upload/v1683898996/1826_0_zdd1lq.jpg",
+    "manufacturer": "Fine Woodworks",
+    "price": 54.99,
+    "sustainabilityFromLeed": "Low-Impact Materials"
+},
+{
+    "name": "Heritage Herringbone",
+    "description": "Classic herringbone patterned parquet for ceilings",
+    "category": "Ceiling",
+    "imageUrl": "https://res.cloudinary.com/doiidwyh3/image/upload/v1683899073/Heritage_Herringbone_kuatof.jpg",
+    "manufacturer": "Timeless Timber",
+    "price": 64.99,
+    "sustainabilityFromLeed": "Renewable Materials"
+},
+{
+    "name": "Royal Maple",
+    "description": "Maple parquet flooring with a regal touch",
+    "category": "Flooring",
+    "imageUrl": "https://res.cloudinary.com/doiidwyh3/image/upload/v1683899114/Royal_Maple_w3qxqn.webp",
+    "manufacturer": "Crown Carpentry",
+    "price": 44.99,
+    "sustainabilityFromLeed": "Not Sustainable"
+},
+{
+    "name": "EcoCraft Bamboo",
+    "description": "Eco-friendly bamboo parquet for sustainable living",
+    "category": "Roofing",
+    "imageUrl": "https://res.cloudinary.com/doiidwyh3/image/upload/v1683899150/EcoCraft_Bamboo_w8mjjg.jpg",
+    "manufacturer": "Green Living Supplies",
+    "price": 29.99,
+    "sustainabilityFromLeed": "Certified Sustainable Materials"
+},
+{
+    "name": "Urban Concrete",
+    "description": "Modern parquet with a concrete-inspired design",
+    "category": "Wall",
+    "imageUrl": "https://res.cloudinary.com/doiidwyh3/image/upload/v1683899198/Urban_Concrete_ru6tcc.jpg",
+    "manufacturer": "Metropolitan Interiors",
+    "price": 34.99,
+    "sustainabilityFromLeed": "Recyclable Materials"
+},
+{
+    "name": "Vintage Chestnut",
+    "description": "Timeless chestnut parquet with a vintage charm",
+    "category": "Flooring",
+    "imageUrl": "https://res.cloudinary.com/doiidwyh3/image/upload/v1683899236/Vintage_Chestnut_bjhxqb.jpg",
+    "manufacturer": "Rustic Revival Hardwoods",
+    "price": 59.99,
+    "sustainabilityFromLeed": "Renewable Materials"
+},
+{
+    "name": "Modern Slate",
+    "description": "Sleek and contemporary slate-inspired parquet",
+    "category": "Bathroom",
+    "imageUrl": "https://res.cloudinary.com/doiidwyh3/image/upload/v1683899319/Modern_Slate_m5askk.jpg",
+    "manufacturer": "Urban Interiors",
+    "price": 39.99,
+    "sustainabilityFromLeed": "Low-Impact Materials"
+},
+{
+    "name": "Artisanal Marquetry",
+    "description": "Handcrafted parquet with intricate marquetry details",
+    "category": "Wall",
+    "imageUrl": "https://res.cloudinary.com/doiidwyh3/image/upload/v1683899355/Artisanal_Marquetry_bgake1.jpg",
+    "manufacturer": "Master Craftsmen Co.",
+    "price": 74.99,
+    "sustainabilityFromLeed": "Certified Sustainable Materials"
+},
+{
+    "name": "Noble Oak",
+    "description": "Elegant oak parquet for a refined living space",
+    "category": "Ceiling",
+    "imageUrl": "https://res.cloudinary.com/doiidwyh3/image/upload/v1683899429/Noble_Oak_yozhyi.jpg",
+    "manufacturer": "Regal Flooring Solutions",
+    "price": 54.99,
+    "sustainabilityFromLeed": "Not Sustainable"
+}
+]

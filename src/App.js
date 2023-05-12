@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import { add } from 'google-fonts';
 import ProfilePage from './pages/ProfilePage';
+import ParquetPage from './pages/ParquetPage';
 
 add({
   Montserrat: true,
@@ -20,6 +21,7 @@ function App() {
         <Route path="/signup" element={ <SignupPage />} />
         <Route path="/login" element={ <LoginPage />} />
         <Route path="/profile" element={ <ProfilePage />} />
+        <Route path="/parquet" element={ <ParquetPage />} />
       </Routes>
     </div>
   );
