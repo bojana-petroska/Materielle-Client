@@ -4,9 +4,11 @@ import NavOtherPages from "../components/NavOtherPages";
 
 function ParquetPage(props) {
 
-  const [materials, setMaterials] = useState();
+  const [materials, setMaterials] = useState([]);
   const [query, setQuery] = useState('');
   const [sortBy, setSortBy] = useState('');
+  const [thumbnailSize, setThumbnailSize] = useState('small');
+  
 
 
   const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005/";
@@ -15,7 +17,18 @@ function ParquetPage(props) {
     setQuery(event.target.value);
   }
 
-  const handleSortByChange = () => {
+  const handleSortByChange = (event) => {
+    const selectedSortBy = event.target.value
+
+    let newSortBy;
+
+    if (selectedSortBy === sortBy) {
+      newSortBy = ""; 
+    } else {
+      newSortBy = selectedSortBy;
+    }
+    setSortBy(newSortBy)
+
     axios
       .get(`${API_URL}auth/search?query=${query}&sortBy=${sortBy}`)
       .then((response) => {
@@ -28,7 +41,7 @@ function ParquetPage(props) {
     
   useEffect(() => {
     axios
-    .get(`${API_URL}auth/search?query=${query}`)
+    .get(`${API_URL}auth/search?query=${query}&sortBy=${sortBy}`)
     .then((response) => {
       setMaterials(response.data)
     })
@@ -36,6 +49,59 @@ function ParquetPage(props) {
       console.log(err)
     })
   }, [query, sortBy]);
+
+  const handleEnlargeClick = () => {
+    setThumbnailSize('large');
+  };
+
+  const handleShrinkClick = () => {
+    setThumbnailSize('small');
+  };
+
+  const getUserProfile = () => {
+    axios.get(`${API_URL}auth/profile`)
+    .then(response => response.data)
+    .catch(err => console.log(err))
+  }
+
+  const handleAddToWishList = (materialId) => {
+    const authToken = localStorage.getItem('authToken')
+
+    if (!authToken) {
+      console.log('Authorization token not found.')
+      return
+    }
+
+    axios.post(`${API_URL}api/wishlist/add`, { materialId }, { headers: { Authorization: `Bearer ${authToken}` }})
+    .then((response) => {
+      console.log('Material added to the wish list.')
+    }).catch(err => {
+      console.log(err)
+    })
+
+    getUserProfile()
+    .then(userProfile => {
+      const userWishList = userProfile.wishlist || []
+      const existingMaterial = userWishList.find(item => item._id === materialId)
+
+      if(existingMaterial) {
+        console.log('Material already in the wish list.')
+      } else {
+        userWishList.push(materialId)
+
+        axios.put(`${API_URL}api/user/profile`, { wishList: userWishList })
+        .then(response => {
+          console.log('Material added to the wish list.')
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      }
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
 
   return (
     <div>
@@ -56,21 +122,42 @@ function ParquetPage(props) {
       />
       <div className="list-of-parquet">
 
-      <button onClick={handleSortByChange} className="just-button">Sort by name</button>
+      <button onClick={handleEnlargeClick} 
+        className="just-button">big</button>
+      <button onClick={handleShrinkClick}
+        className="just-button">small</button>
+
+
+      <button 
+      onClick={(event) => {handleSortByChange(event)}} 
+      className={`just-button ${sortBy === "name" ? "active" : ""}`} 
+      value="name">
+      Sort by name (alphabetically)</button>
+      <button onClick={handleSortByChange} 
+      className={`just-button ${sortBy === "price" ? "active" : ""}`} 
+      value="price">
+      Sort by price (lowest price)</button>
+
+      <div>
 
       {materials && materials.map((material) => {
         return (
-          <div key={material._id}>
+          <div className={`material-thumbnail ${thumbnailSize === 'large' ? 'large-thumbnail' : 'small-thumbnail'}`} 
+          key={material._id}>
           <img src={material.imageUrl} alt="parquet"></img>
-            <p>name: {material.name}</p>
-            <p>description: {material.description}</p>
-            <p>category: {material.category}</p>
-            <p>manufacturer: {material.manufacturer}</p>
-            <p>price: {material.price}</p>
-            <p>certification: {material.sustainabilityFromLeed}</p>
+            <p className="name">name: {material.name}</p>
+            <p className="description">description: {material.description}</p>
+            <p className="category">category: {material.category}</p>
+            <p className="manufacturer">manufacturer: {material.manufacturer}</p>
+            <p className="price">price: {material.price}</p>
+            <p className="certification">certification: {material.sustainabilityFromLeed}</p>
+            <button onClick={() => handleAddToWishList(material._id)}>
+              Add to Wish List
+            </button>
           </div>
         )
       })}
+      </div>
       </div>
     </div>
     </div>

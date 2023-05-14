@@ -475,6 +475,40 @@
     margin: 30px;
   }
   
+  /* .material-thumbnail {
+    width: 600px;
+    height: 600px;
+    border-radius: var(--border-radius-smaller);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .large-thumbnail {
+    width: 200px;
+    height: 200px;
+    margin: 0;
+    font-size: 12px;
+  }
+  
+  .small-thumbnail {
+    width: 150px;
+    height: 150px;
+    font-size: 8px;
+  } */
+
+  .edit-profile-text {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin: 100px 0 0 50px;
+    font-size: 18px;
+  }
+
+
+  
+  
   
 
   

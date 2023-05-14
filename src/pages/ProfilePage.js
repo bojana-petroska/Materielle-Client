@@ -2,11 +2,14 @@ import NavOtherPages from "../components/NavOtherPages";
 import { AuthContext } from "../context/auth.context";
 import { useContext, useState } from "react"; 
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function ProfilePage() {
 
   const { user } = useContext(AuthContext)
   console.log("USER", user)
+  const [wishlist, setWishlist] = useState([])
+
 
   const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005/";
 
@@ -24,10 +27,12 @@ function ProfilePage() {
     axios
       .post(`${API_URL}auth/upload-photo`, formData)
       .then((response) => {
+        const uploadedMaterial = response.data.imageUrl
+        setWishlist((preWishList) => [...preWishList, uploadedMaterial])
         console.log(response.data.imageUrl);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        console.log(err);
       });
   };
 
@@ -49,11 +54,20 @@ function ProfilePage() {
     </div>
 
     <div className='home-page-btns-wrap'>
-      <button className="profile-page-btn-white">New project</button>
+    <Link to="/edit">
+
+      <button className="profile-page-btn-white">New project(EDIT PAGE)</button>
+    </Link>
       <button className="profile-page-btn-blue">Organize projects</button>
     </div>
 
     <div className="img-box-home-page">
+        {wishlist.map((item, index) => (
+          <div key={index} className="img-container-project1"  name="img-container-project1">
+            <p>added to wish list: {item}</p>
+          </div>
+        ))}
+
           <div className="img-container-project1"  name="img-container-project1">
           <p className="text-under-projects">Anna's home</p>
           </div>
