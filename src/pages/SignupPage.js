@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import authService from "./../services/auth.service";
-import NavOtherPages from "../components/NavOtherPages";
+import Navbar from "../components/Navbar";
 
 
 function SignupPage(props) {
@@ -50,7 +50,7 @@ function SignupPage(props) {
 
   return (
     <div>
-      <NavOtherPages />
+      <Navbar />
       <div className="SignupPage">
 
       <h1 style={{fontSize: "16px"}}>SIGN UP</h1>

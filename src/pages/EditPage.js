@@ -1,9 +1,36 @@
-import NavOtherPages from "../components/NavOtherPages";
+import Navbar from "../components/Navbar";
+import { useState } from "react";
+import axios from "axios";
 
 function EditPage() {
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [wishlist, setWishlist] = useState([])
+
+  const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005/";
+
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
+
+  const handleUpload = () => {
+    const formData = new FormData();
+    formData.append('photo', selectedFile);
+
+    axios
+      .post(`${API_URL}auth/upload-photo`, formData)
+      .then((response) => {
+        const uploadedMaterial = response.data.imageUrl
+        setWishlist((preWishList) => [...preWishList, uploadedMaterial])
+        console.log(response.data.imageUrl);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div>
-    <NavOtherPages />
+    <Navbar />
     <img className="stories-on-top" src ="/images/my-profile/06.jpg" alt ='edit-profile-photo' style={{width: '86px', height: '86px', borderRadius: '50%', marginLeft: "34px", marginTop: "100px"}} />
 
     <div className="edit-profile-text">

@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "./../context/auth.context";
 import authService from "./../services/auth.service";
-import NavOtherPages from "../components/NavOtherPages";
+import Navbar from "../components/Navbar";
 
 
 function LoginPage(props) {
@@ -40,7 +40,7 @@ function LoginPage(props) {
   
   return (
     <div>
-      <NavOtherPages />
+      <Navbar />
     <div className="LoginPage">
       <h1 style={{fontSize: "16px"}}>LOG IN</h1>
 

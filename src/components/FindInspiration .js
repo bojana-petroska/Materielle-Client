@@ -1,8 +1,12 @@
+import { Link } from "react-router-dom";
+
 function FindInspiration() {
  
   return (
     <div>
-     <button className="home-page-btn-white">Find Inspiration</button>
+    <Link className="home-page-btn-white" to="https://www.pinterest.de/search/pins/?q=interior%20designs&rs=typed">
+     Find Inspiration
+    </Link>
     </div>
   );
 }
