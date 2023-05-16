@@ -3,42 +3,59 @@ import { AuthContext } from "../context/auth.context";
 import { useContext, useState, useEffect } from "react"; 
 import axios from "axios";
 import { Link } from "react-router-dom";
+import ChatGPT from "../components/ChatGPT";
 
 
 function ProfilePage() {
 
-  const { user } = useContext(AuthContext)
+  const { user, isLoading } = useContext(AuthContext)
   //console.log("USER", user)
   const [wishlist, setWishlist] = useState([])
+  const [wishListLoaded, setWishListLoaded] = useState(false)
+
+  console.log(wishlist)
+  const [showChat, setShowChat] = useState(false)
+
+  useEffect(()=> {
+  if(user?.profile.wishList) {
+    setWishlist(user.profile.wishList)
+  }
+  },[])
 
   const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005/";
 
   const removeMaterial = (materialId) => {
     const authToken = localStorage.getItem('authToken')
 
-    //console.log(materialId)
+    console.log(materialId)
 
-    if(authToken) {
+    if(authToken && materialId) {
       axios.delete(`${API_URL}auth/wishlist/remove/${materialId}`,
       { headers: { Authorization: `Bearer ${authToken}` } }
       )
       .then(response => {
-        console.log(response.data)
-        const wishListObj = response.data
-        const wishListArr = Object.values(wishListObj)
-        console.log(wishListArr)
-        
-        const updatedWishList = wishListArr.filter(item => item._id !== materialId)
-        
-        setWishlist(updatedWishList)
-        console.log(updatedWishList)
+      console.log(response.data)
+      const wishlistArr = response.data.wishList.filter(item => item !== materialId)
+      setWishlist(wishlistArr)
+       console.log(wishlistArr)
       })
       .catch(err => {
         console.log(err)
       })
     }
-
   }
+
+  const handleChatButtonClick = () => {
+    setShowChat(true)
+  }
+
+  useEffect(() => {
+    setWishListLoaded(true)
+  }, [wishlist])
+
+  if(wishListLoaded) {
+
+  
 
   return (
     <div>
@@ -65,14 +82,15 @@ function ProfilePage() {
     </div>
             <p>my wish list: </p>
 
-        {user?.profile.wishList.map((item, index) => (
+        {wishlist?.map((item, index) => (
           <div key={index} className="img-container-project-wishlist"  name="img-container-project1">
             <img style={{width: '150px', borderRadius: '10px'}} src={item.imageUrl} alt="wishlist1"/>
             <p>name: {item.name}</p>
             <p>description: {item.description}</p>
             <p>manufacturer: {item.manufacturer}</p>
             <p>€ {item.price}</p>
-            <button>view info vie CHAT GPT</button>
+            <button onClick={handleChatButtonClick}>view info vie CHAT GPT</button>
+            {showChat && <ChatGPT />}
             <button onClick={() => removeMaterial(item._id)}>remove item</button>
           </div>
         ))}
@@ -114,6 +132,7 @@ function ProfilePage() {
 
     </div>
   );
+}
 }
 
 export default ProfilePage;

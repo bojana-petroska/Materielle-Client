@@ -554,6 +554,18 @@
     align-items: start;
     margin: 100px 0 0 50px;
     font-size: 18px;
+    justify-content: space-between;
+  }
+
+  .edit-paragraph {
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 15px;
   }
 
 
