@@ -10,7 +10,7 @@ function SignupPage(props) {
   const [username, setName] = useState("");
   const [userType, setUserType] = useState("")
   const [company, setCompany] = useState("")
-  const [iAmInterestedIn, setIAmInterestedIn] = useState("")
+  const [interest, setInterest] = useState("")
   const [agreeToTerms, setAgreeToTerms] = useState(false)
   const [errorMessage, setErrorMessage] = useState(undefined);
 
@@ -23,14 +23,14 @@ function SignupPage(props) {
   const handleName = (e) => setName(e.target.value);
   const handleUserType = (e) => setUserType(e.target.value)
   const handleCompany = (e) => setCompany(e.target.value)
-  const handleIAmInterestedIn = (e) => setIAmInterestedIn(e.target.value)
+  const handleIAmInterestedIn = (e) => setInterest(e.target.value)
   const handleAgreeToTerms = () => setAgreeToTerms(!agreeToTerms)
   
   const handleSignupSubmit = (e) => {
     console.log('hi :' + userType)
     e.preventDefault();
     // Create an object representing the request body
-    const requestBody = { email, password, username, userType, company, iAmInterestedIn, agreeToTerms };
+    const requestBody = { email, password, username, userType, company, interest, agreeToTerms };
 
     // Make an axios request to the API
     // If POST request is successful redirect to login page
@@ -67,24 +67,63 @@ function SignupPage(props) {
         <input placeholder="Repeat Password" type="password" name="password" value={password} onChange={handlePassword} />
 
         <label>User Name *</label>
-        <input placeholder="Name" type="text" name="name" value={username} onChange={handleName} />
+        <input 
+        placeholder="Name" 
+        type="text" 
+        name="name" 
+        value={username} 
+        onChange={handleName} />
 
         <label>I am: (optional)</label>
-          <input className="selection-circle" type="radio" id="curious-individual" name="userType" value="Curious individual" onChange={handleUserType} />
+        <div className="selection-circle">
+          <input  
+          type="radio" 
+          id="curious-individual" 
+          name="userType" 
+          value="Curious individual" 
+          onChange={handleUserType} />
             <label htmlFor="curious-individual">Curious Individual</label>
-          <input className="selection-circle" type="radio" id="professional" name="userType" value="Professional" onChange={handleUserType} />
+        </div>
+        <div className="selection-circle">
+          <input  
+          type="radio" 
+          id="professional" 
+          name="userType" 
+          value="Professional" 
+          onChange={handleUserType} />
             <label htmlFor="professional">Professional</label>
+        </div>
 
         <label>Company: (optional)</label>
-        <input placeholder="Name of company" type="text" name="company" value={company} onChange={handleCompany} />
+        <input 
+        placeholder="Name of company" 
+        type="text" 
+        name="company" 
+        value={company} 
+        onChange={handleCompany} />
 
         <label>I am interested in: (optional)</label>
-          <input className="selection-circle" type="radio" id="exterior" name="userType" value="Exterior" onChange={handleIAmInterestedIn} />
+        <div className="selection-circle">
+          <input  
+          type="radio" 
+          id="exterior" 
+          name="interest" 
+          value="Exterior" 
+          onChange={handleIAmInterestedIn} />
             <label htmlFor="exterior">Exterior</label>
-          <input className="selection-circle" type="radio" id="interior" name="userType" value="Interior" onChange={handleIAmInterestedIn} />
+        </div>
+            <div className="selection-circle">
+          <input 
+           type="radio" id="interior" name="interest" value="Interior" onChange={handleIAmInterestedIn} />
             <label htmlFor="interior">Interior</label>
-          <input className="selection-circle" type="radio" id="both" name="userType" value="Both" onChange={handleIAmInterestedIn} />
+            </div>
+            <div className="selection-circle">
+          <input 
+            type="radio" 
+            id="both"
+            name="interest" value="Both" onChange={handleIAmInterestedIn} />
             <label htmlFor="both">Both</label>
+            </div>
 
           <div className="agreeToTerms">
             <input type="checkbox" id="agreeToTerms" name="agreeToTerms" value={agreeToTerms} onClick={handleAgreeToTerms} />

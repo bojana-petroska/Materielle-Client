@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
+
 
 function ParquetPage(props) {
 
   const [materials, setMaterials] = useState([]);
   const [query, setQuery] = useState('');
   const [sortBy, setSortBy] = useState('');
-  const [thumbnailSize, setThumbnailSize] = useState('small');
+  const [thumbnailSize, setThumbnailSize] = useState('large');
 
   const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005/";
 
@@ -82,37 +83,48 @@ function ParquetPage(props) {
       return
     }
 
+    const existingMaterial = userProfile.wishList.some(item => item._id.toString() === materialId.toString())
+    console.log(existingMaterial)
+    if(existingMaterial)
+    
+      return;
+
     axios.post(`${API_URL}auth/wishlist/add`, { materialId }, { headers: { Authorization: `Bearer ${authToken}` }})
-    .then((response) => {
+    .then(() => {
       console.log('Material added to the wish list.')
     }).catch(err => {
       console.log(err)
     })
 
-    const userWishList = userProfile.wishList
-    
-    const existingMaterial = userWishList.find(item => item._id === materialId)
+    const updatedWishList = [...userProfile.wishList];
+    updatedWishList.push({ _id: materialId })
 
-    if(existingMaterial) {
-        console.log('Material already in the wish list.')
-    } else {
-        userWishList.push(materialId)
+    console.log('Before update:', userProfile.wishList);
+    console.log('After update:', updatedWishList);
 
-        axios.put(`${API_URL}auth/user/profile`, { wishList: userWishList })
-        .then(response => {
+        axios.put(`${API_URL}auth/user/profile`, { wishList: updatedWishList }, { headers: { Authorization: `Bearer ${authToken}` }})
+        .then(() => {
+          setUserProfile((prevProfile) => ({
+            ...prevProfile,
+            wishList: updatedWishList.map((item) => ({ ...item }))
+          }));
           console.log('Material added to the wish list.')
       })
         .catch(err => {
           console.log(err)
         })
       }
-  }
+
+
 
   return (
     <div>
         <Navbar />
 
     <div className="nav-search-parquet">
+    
+
+    <div className="big-small-icons">
     <div className="search-parquet">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M7.03999 13.28C3.58399 13.28 0.799988 10.496 0.799988 7.04005C0.799988 3.58405 3.58399 0.800049 7.03999 0.800049C10.496 0.800049 13.28 3.58405 13.28 7.04005C13.28 10.496 10.496 13.28 7.03999 13.28ZM7.03999 1.76005C4.11199 1.76005 1.75999 4.11205 1.75999 7.04005C1.75999 9.96805 4.11199 12.32 7.03999 12.32C9.96799 12.32 12.32 9.96805 12.32 7.04005C12.32 4.11205 9.96799 1.76005 7.03999 1.76005Z" fill="#989898"/>
@@ -126,14 +138,18 @@ function ParquetPage(props) {
         onChange={handleInputSearch}  
       />
     </div>
-      <div className="list-of-parquet">
+      <svg onClick={handleEnlargeClick} width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect  
+        x="0.25" y="0.25" width="20.5" height="20.5" stroke="#9A9A9A" stroke-width="0.5"/>
+      </svg>
+      <svg onClick={handleShrinkClick}
+       width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0.821289" y="0.25" width="20.9286" height="20.9286" stroke="black" stroke-width="0.5"/>
+              <path d="M11.5357 0.428711C11.5357 0.29064 11.4238 0.178711 11.2857 0.178711C11.1476 0.178711 11.0357 0.29064 11.0357 0.428711H11.5357ZM11.0357 21.0001V21.2501H11.5357V21.0001H11.0357ZM1 10.893C0.861929 10.893 0.75 11.0049 0.75 11.143C0.75 11.2811 0.861929 11.393 1 11.393V10.893ZM21.5714 11.393C21.7095 11.393 21.8214 11.2811 21.8214 11.143C21.8214 11.0049 21.7095 10.893 21.5714 10.893V11.393ZM11.0357 0.428711V21.0001H11.5357V0.428711H11.0357ZM1 11.393H21.5714V10.893H1V11.393Z" fill="black"/>
+      </svg>
+    </div>
 
-      <button onClick={handleEnlargeClick} 
-        className="just-button">big</button>
-      <button onClick={handleShrinkClick}
-        className="just-button">small</button>
-
-
+    <div>
       <button style={{height: '25px', width: '200px', fontSize: '12px'}}
       onClick={(event) => {handleSortByChange(event)}} 
       className={`home-page-btn-white ${sortBy === "name" ? "active" : ""}`} 
@@ -143,14 +159,17 @@ function ParquetPage(props) {
       className={`home-page-btn-white ${sortBy === "price" ? "active" : ""}`} 
       value="price">
       Sort by price (lowest price)</button>
+    </div>
 
       <div>
+      <div className="list-of-parquet">
 
       {materials && materials.map((material) => {
+        // wishlist.filter((obj) obj._id === material._id)
         return (
           <div className={`material-thumbnail ${thumbnailSize === 'large' ? 'large-thumbnail' : 'small-thumbnail'}`} 
           key={material._id}>
-          <img style={{width: '350px', height: '350px', borderRadius: '10px'}} src={material.imageUrl} alt="parquet"></img>
+          <img src={material.imageUrl} alt="parquet"></img>
             <p className="name"><strong>name: </strong>{material.name}</p>
             <p className="description"><strong>description: </strong>{material.description}</p>
             <p className="category"><strong>category: </strong>{material.category}</p>
@@ -158,7 +177,7 @@ function ParquetPage(props) {
             <p className="price"><strong>€: </strong>{material.price}</p>
             <p className="certification"><strong>certification: </strong>{material.sustainabilityFromLeed}</p>
             <button style={{height: '25px', fontSize: '12px'}} className="home-page-btn-white" onClick={() => handleAddToWishList(material._id)}>
-              Add to Wish List
+               Wish List
             </button>
           </div>
         )
