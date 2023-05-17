@@ -6,7 +6,7 @@ function ChatGPT() {
   const [userInput, setUserInput] = useState("");
   const [materialId, setMaterialId] = useState(""); 
   
-  const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005/";
+  const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005/";
   const OPENAI_API_KEY = process.env.OPENAI_API_KEY 
 
   useEffect(() => {

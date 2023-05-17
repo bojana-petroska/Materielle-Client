@@ -10,7 +10,7 @@ function ParquetPage(props) {
   const [sortBy, setSortBy] = useState('');
   const [thumbnailSize, setThumbnailSize] = useState('large');
 
-  const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005/";
+  const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005/";
 
   const handleInputSearch = (event) => {
     setQuery(event.target.value);
@@ -83,11 +83,13 @@ function ParquetPage(props) {
       return
     }
 
-    const existingMaterial = userProfile.wishList.some(item => item._id.toString() === materialId.toString())
+    const existingMaterial = userProfile.wishList.some(item => item._id === materialId)
+
     console.log(existingMaterial)
-    if(existingMaterial)
     
-      return;
+    if(existingMaterial)
+    return;
+    console.log(existingMaterial)
 
     axios.post(`${API_URL}auth/wishlist/add`, { materialId }, { headers: { Authorization: `Bearer ${authToken}` }})
     .then(() => {
@@ -113,9 +115,7 @@ function ParquetPage(props) {
         .catch(err => {
           console.log(err)
         })
-      }
-
-
+  }
 
   return (
     <div>
