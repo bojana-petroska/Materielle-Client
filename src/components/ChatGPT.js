@@ -9,19 +9,19 @@ function ChatGPT() {
   const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005/";
   const OPENAI_API_KEY = process.env.OPENAI_API_KEY 
 
-  useEffect(() => {
-    axios
-      .get(`${API_URL}auth/wishlist/add`)
-      .then((response) => {
-        const wishlist = response.data.wishList;
-        if (wishlist.length > 0) {
-          setMaterialId(wishlist[0]);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []); 
+  // useEffect(() => {
+  //   axios
+  //     .get(`${API_URL}auth/wishlist/add`)
+  //     .then((response) => {
+  //       const wishlist = response.data.wishList;
+  //       if (wishlist.length > 0) {
+  //         setMaterialId(wishlist[0]);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }, []); 
 
   const handleInputChange = (event) => {
     setUserInput(event.target.value);
