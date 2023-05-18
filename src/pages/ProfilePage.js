@@ -69,36 +69,36 @@ if(!user && !wishlist){
     <Navbar />
     <div className=" ProfilePage profile-top">
       <div>
-        <img className="stories-on-top" src="/images/my-profile/paris.jpg" alt="profile-pic"  style={{width: '86px', height: '86px', borderRadius: '50%', marginLeft: "34px", marginTop: "0px"}}/>
+        <img className="stories-on-top" src="/images/my-profile/paris.jpg" alt="profile-pic"  style={{width: '100px', height: '100px', borderRadius: '50%', marginLeft: "50px", marginTop: "0px"}}/>
       </div>
       {user && (
        <div className="user-description">
         <p><strong>{user.profile.username}</strong></p>
         <p>{user.profile.company}</p>
+        <Link to="/edit">edit ptofile</Link>
         {/* <p>{user.profile.interest}</p> */}
        </div> 
       )}
     </div>
 
     <div className='home-page-btns-wrap'>
-    <Link to="/edit">
 
-      <button className="profile-page-btn-white">New project(EDIT PAGE)</button>
-    </Link>
+      <button className="profile-page-btn-white">New project</button>
+
       <button className="profile-page-btn-blue">Organize projects</button>
     </div>
             <p>my wish list: </p>
 
         {wishlist?.map((item, index) => (
           <div key={index} className="img-container-project-wishlist"  name="img-container-project1">
-            <img style={{width: '150px', borderRadius: '10px'}} src={item.imageUrl} alt="wishlist1"/>
+            <img style={{width: '150px', borderRadius: '10px', marginBottom: '10px'}} src={item.imageUrl} alt="wishlist1"/>
             <p>name: {item.name}</p>
-            <p>description: {item.description}</p>
+            {/* <p>description: {item.description}</p> */}
             <p>manufacturer: {item.manufacturer}</p>
             <p>€ {item.price}</p>
-            <button onClick={handleChatButtonClick}>view info vie CHAT GPT</button>
+            <button onClick={handleChatButtonClick} className="home-page-btn-white" style={{height: '20px'}}>ask CHAT GPT</button>
             {showChat && <ChatGPT />}
-            <button onClick={() => removeMaterial(item._id)}>remove item</button>
+            <button style={{height: '20px'}} onClick={() => removeMaterial(item._id)} className="home-page-btn-white" >remove item</button>
           </div>
         ))}
           <footer className="footer-box">
