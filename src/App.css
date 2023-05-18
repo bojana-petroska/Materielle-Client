@@ -594,9 +594,10 @@
     display: flex;
     flex-direction: column;
     align-items: start;
-    margin: 100px 0 0 50px;
-    font-size: 18px;
-    justify-content: space-between;
+    margin: 60px;
+    font-size: 15px;
+    max-width: 400px;
+    /* justify-content: space-between; */
   }
 
   .edit-paragraph {
@@ -606,13 +607,16 @@
     text-align: left;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
+    margin: 15px;
     font-size: 15px;
   }
 
-  .editing-page {
-    margin-top: 100px;
+  .edit-profile-text input {
+    width: 300px;
+    border: none;
+    margin: 5px;
   }
+
 
   
   

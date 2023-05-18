@@ -79,11 +79,7 @@ const handleSubmit = async (e) => {
       alert('Profile updated successfully!');
     }
   } catch (error) {
-    // if(error.response && error.response.data && error.response.data.message) {
-    //   console.log(error.response.data.message);
-    // } else {
       console.log('Error updating profile', error);
-    //}
     }
   };
 
@@ -113,12 +109,11 @@ const handleSubmit = async (e) => {
     <div>
     <Navbar />
 
-    <img className="stories-on-top" src ="/images/my-profile/06.jpg" alt ='edit-pic' style={{width: '86px', height: '86px', borderRadius: '50%', marginLeft: "34px", marginTop: "100px"}} />
-    <Link>edit photo</Link>
+    <img className="stories-on-top" src ="/images/my-profile/paris.jpg" alt ='edit-pic' style={{width: '95px', height: '95px', borderRadius: '50%', marginLeft: "150px", marginTop: "150px"}} />
 
-    <div className="editing-page">
+    <div >
       {editing ? (
-        <form onSubmit={handleSubmit}>
+        <form className="edit-profile-text" onSubmit={handleSubmit}>
           <label>
             name:
             <input
@@ -155,29 +150,22 @@ const handleSubmit = async (e) => {
               onChange={handleInputChange}
             />
           </label>
-          <button type="submit">Save</button>
-          <button type="button" onClick={handleCancel}>
+          <button type="submit" className="profile-page-btn-white">Save</button>
+          <button type="button" onClick={handleCancel} className="profile-page-btn-blue">
             Cancel
           </button>
         </form>
       ) : (
-        <div>
+        <div className="edit-profile-text">
           <p>name: {user && username?.toString()}</p>
           <p>email: {user && email.toString()}</p>
           <p>company: {user && company.toString()}</p>
           <p>I am interested in: {user && userType.toString()}</p>
-          <button onClick={handleEdit}>Edit Profile</button>
+            <button onClick={handleEdit} className="profile-page-btn-blue" style={{padding: '0', marginLeft: '25px'}}>Edit Profile</button>
         </div>
       )}
     </div>
-
-
-       <p style={{margin: '20px 60px'}}>Deactivate Profile</p>
-    
-    <div style={{margin: '20px 60px'}} >
-      <button className="profile-page-btn-blue">Done</button>
-    </div>
-       </div> 
+  </div> 
 
   );
 }
