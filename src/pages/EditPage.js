@@ -17,55 +17,21 @@ function EditPage() {
   const [userType, setUserType] = useState('');
   const [interest, setInterest] = useState('');
   const [occupation, setOccupation] = useState('');
-  const [newInfo, setNewInfo] = useState(user?.profile.username);
 
 
   const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005/";
 
   useEffect(() => {
     if (user) {
-      setUserName(user.profile.username);
-      setEmail(user.email);
-      setCompany(user.profile.company);
-      setUserType(user.profile.userType);
-      setInterest(user.profile.interest);
-      setOccupation(user.profile.occupation);
+      const { username, email,company, userType, interest, occupation } = user.profile
+      setUserName(username);
+      setEmail(email);
+      setCompany(company);
+      setUserType(userType);
+      setInterest(interest);
+      setOccupation(occupation);
     }
   }, [user]);
-
-
-  // const handleSave = () => {
-  //   const updatedProfile = {
-  //     username: newInfo,
-  //     email,
-  //     company,
-  //     userType,
-  //     interest,
-  //     occupation,
-  //     wishList: user?.profile?.wishList
-  //   }
-
-  //   const authToken = localStorage.getItem('authToken')
-
-  //   axios.put(`${API_URL}auth/profile`, updatedProfile, {
-  //     headers: {
-  //       Authorization: `Bearer ${authToken}`
-  //     }
-  //   })
-  //   .then((response) => {
-  //     console.log(response.data)
-  //     setIsEditing(false)
-  //   })
-  //   .catch((err) => {
-  //     console.log(err)
-  //   })
-  // }
-
-//______________________________________
-
-useEffect(() => {
-  setUserName(authContext.user);
-}, [authContext.user]);
 
 const handleEdit = () => {
   setEditing(true);
@@ -79,9 +45,11 @@ const handleSubmit = async (e) => {
   e.preventDefault();
   const authToken = localStorage.getItem('authToken');
 
+  console.log(authToken)
+
 
   try {
-    const response = await axios.put('/auth/profile', {
+    const response = await axios.put(`${API_URL}auth/profile`, {
       username,
       email,
       company,
@@ -95,22 +63,20 @@ const handleSubmit = async (e) => {
       },
     });
 
+    console.log(response.data)
     if (response.status === 200) {
-      const updatedUser = response.data.user;
-      const newAuthToken = response.data.authToken;
-      localStorage.setItem('authToken', newAuthToken);
-      authContext.updateUser(updatedUser);
+      const { updatedUser } = response.data;
+      setUserName(updatedUser.username)
       
-      //setUserName(updatedUser);
       setEditing(false);
       alert('Profile updated successfully!');
     }
   } catch (error) {
-    if(error.response && error.response.data && error.response.data.message) {
-      console.log(error.response.data.message);
-    } else {
-      console.log('Error updating profile');
-    }
+    // if(error.response && error.response.data && error.response.data.message) {
+    //   console.log(error.response.data.message);
+    // } else {
+      console.log('Error updating profile', error);
+    //}
     }
   };
 
@@ -135,40 +101,54 @@ const handleSubmit = async (e) => {
   return (
     <div>
     <Navbar />
+
+    <img className="stories-on-top" src ="/images/my-profile/06.jpg" alt ='edit-pic' style={{width: '86px', height: '86px', borderRadius: '50%', marginLeft: "34px", marginTop: "100px"}} />
+    <Link>edit photo</Link>
+
     <div className="editing-page">
-      <h2>User Profile</h2>
       {editing ? (
         <form onSubmit={handleSubmit}>
           <label>
             Name:
-            <input type="text" name="username" value={username} onChange={handleInputChange} />
+            <input
+              type="text"
+              name="username"
+              value={username}
+              onChange={handleInputChange}
+            />
           </label>
           <label>
             Email:
-            <input type="email" name="email" value={email} onChange={handleInputChange} />
+            <input
+              type="email"
+              name="email"
+              value={email}
+              onChange={handleInputChange}
+            />
           </label>
           <button type="submit">Save</button>
-          <button type="button" onClick={handleCancel}>Cancel</button>
+          <button type="button" onClick={handleCancel}>
+            Cancel
+          </button>
         </form>
       ) : (
         <div>
-        <p>Name: {user ? user.username : ''}</p>
-          <p>Email: {user ? user.email : ''}</p>
+          <p>Name: {user && username}</p>
+          <p>Email: {user && user.profile.email}</p>
           <button onClick={handleEdit}>Edit Profile</button>
         </div>
       )}
     </div>
 
 
-    <img className="stories-on-top" src ="/images/my-profile/06.jpg" alt ='edit-pic' style={{width: '86px', height: '86px', borderRadius: '50%', marginLeft: "34px", marginTop: "100px"}} />
-    <Link>edit photo</Link>
+    
 
     {/* <div className="edit-profile-text">
   {user && (
     <div>
       <div className="edit-paragraph">
         username:{" "}
-        {isEditing ? (
+        {editing ? (
           <input
             type="text"
             name="username"
@@ -178,10 +158,10 @@ const handleSubmit = async (e) => {
         ) : (
           <span>{user.profile.username}</span>
         )}
-        {isEditing ? (
-          <button onClick={handleSave}>Save</button>
+        {editing ? (
+          <button onClick={handleSubmit}>Save</button>
         ) : (
-          <button onClick={handleEditProfile}>
+          <button onClick={handleSubmit}>
           </button>
         )}
       </div>
