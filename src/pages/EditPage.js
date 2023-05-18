@@ -67,6 +67,13 @@ const handleSubmit = async (e) => {
     if (response.status === 200) {
       const { updatedUser } = response.data;
       setUserName(updatedUser.username)
+      setEmail(updatedUser.email)
+      setCompany(updatedUser.company)
+      setUserType(updatedUser.userType)
+      console.log(username)
+      console.log(email)
+      console.log(company)
+      console.log(userType)
       
       setEditing(false);
       alert('Profile updated successfully!');
@@ -98,6 +105,10 @@ const handleSubmit = async (e) => {
     }
   };
 
+  if(!user){
+    return <h4 style={{marginTop: '150px'}}>Loading...</h4>
+  }
+
   return (
     <div>
     <Navbar />
@@ -109,7 +120,7 @@ const handleSubmit = async (e) => {
       {editing ? (
         <form onSubmit={handleSubmit}>
           <label>
-            Name:
+            name:
             <input
               type="text"
               name="username"
@@ -118,11 +129,29 @@ const handleSubmit = async (e) => {
             />
           </label>
           <label>
-            Email:
+            email:
             <input
               type="email"
               name="email"
               value={email}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            company:
+            <input
+              type="text"
+              name="company"
+              value={company}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            I am interested in:
+            <input
+              type="text"
+              name="userType"
+              value={userType}
               onChange={handleInputChange}
             />
           </label>
@@ -133,41 +162,14 @@ const handleSubmit = async (e) => {
         </form>
       ) : (
         <div>
-          <p>Name: {user && username}</p>
-          <p>Email: {user && user.profile.email}</p>
+          <p>name: {user && username?.toString()}</p>
+          <p>email: {user && email.toString()}</p>
+          <p>company: {user && company.toString()}</p>
+          <p>I am interested in: {user && userType.toString()}</p>
           <button onClick={handleEdit}>Edit Profile</button>
         </div>
       )}
     </div>
-
-
-    
-
-    {/* <div className="edit-profile-text">
-  {user && (
-    <div>
-      <div className="edit-paragraph">
-        username:{" "}
-        {editing ? (
-          <input
-            type="text"
-            name="username"
-            value={newInfo}
-            onChange={handleInputChange}
-          />
-        ) : (
-          <span>{user.profile.username}</span>
-        )}
-        {editing ? (
-          <button onClick={handleSubmit}>Save</button>
-        ) : (
-          <button onClick={handleSubmit}>
-          </button>
-        )}
-      </div>
-    </div>
-  )}
-</div> */}
 
 
        <p style={{margin: '20px 60px'}}>Deactivate Profile</p>
