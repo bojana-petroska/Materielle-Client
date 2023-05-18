@@ -123,7 +123,6 @@ function ParquetPage(props) {
 
     <div className="nav-search-parquet">
     
-
     <div className="big-small-icons">
     <div className="search-parquet">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -176,8 +175,7 @@ function ParquetPage(props) {
             <p className="manufacturer"><strong>manufacturer: </strong>{material.manufacturer}</p>
             <p className="price"><strong>€: </strong>{material.price}</p>
             <p className="certification"><strong>certification: </strong>{material.sustainabilityFromLeed}</p>
-            <button style={{height: '25px', fontSize: '12px'}} className="home-page-btn-white" onClick={() => handleAddToWishList(material._id)}>
-               Wish List
+            <button className="home-page-btn-white white-btn-wish" onClick={() => handleAddToWishList(material._id)} style={{width: '270px', height: '30px', fontSize: '12px'}}>Add to wish list
             </button>
           </div>
         )
