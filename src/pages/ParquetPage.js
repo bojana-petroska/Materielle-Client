@@ -10,6 +10,8 @@ function ParquetPage(props) {
   const [sortBy, setSortBy] = useState('');
   const [thumbnailSize, setThumbnailSize] = useState('large');
   const [selectedMaterial, setSelectedMaterial] = useState(null);
+  const [wishlist, setWishlist] = useState([]);
+
 
 
   const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005/";
@@ -82,47 +84,33 @@ function ParquetPage(props) {
     setThumbnailSize('small');
   };
 
-  const handleAddToWishList = (materialId) => {
-    const authToken = localStorage.getItem('authToken')
-
-    if (!authToken) {
-      console.log('Authorization token not found.')
-      return
+  const handleAddToWishList = (id) => {
+    // Check if the selected material is already in the wishlist
+    const isMaterialInWishlist = wishlist.some((material) => material._id === id);
+  
+    if (thumbnailSize === 'large') {
+      // If the thumbnail size is large, toggle to small thumbnails
+      setThumbnailSize('small');
+  
+      if (!isMaterialInWishlist) {
+        // Add the selected material to the wishlist
+        const selectedMaterial = materials.find((material) => material._id === id);
+        setWishlist([...wishlist, selectedMaterial]);
+      }
+    } else {
+      // If the thumbnail size is already small, add/remove the material from the wishlist
+      if (isMaterialInWishlist) {
+        // Remove the material from the wishlist
+        const updatedWishlist = wishlist.filter((material) => material._id !== id);
+        setWishlist(updatedWishlist);
+      } else {
+        // Add the selected material to the wishlist
+        const selectedMaterial = materials.find((material) => material._id === id);
+        setWishlist([...wishlist, selectedMaterial]);
+      }
     }
-
-    const existingMaterial = userProfile.wishList.some(item => item._id === materialId)
-
-    console.log(existingMaterial)
-    
-    if(existingMaterial)
-    return;
-    console.log(existingMaterial)
-
-    axios.post(`${API_URL}auth/wishlist/add`, { materialId }, { headers: { Authorization: `Bearer ${authToken}` }})
-    .then(() => {
-      console.log('Material added to the wish list.')
-    }).catch(err => {
-      console.log(err)
-    })
-
-    const updatedWishList = [...userProfile.wishList];
-    updatedWishList.push({ _id: materialId })
-
-    console.log('Before update:', userProfile.wishList);
-    console.log('After update:', updatedWishList);
-
-        axios.put(`${API_URL}auth/user/profile`, { wishList: updatedWishList }, { headers: { Authorization: `Bearer ${authToken}` }})
-        .then(() => {
-          setUserProfile((prevProfile) => ({
-            ...prevProfile,
-            wishList: updatedWishList.map((item) => ({ ...item }))
-          }));
-          console.log('Material added to the wish list.')
-      })
-        .catch(err => {
-          console.log(err)
-        })
-  }
+  };
+  
 
   return (
   <div>
